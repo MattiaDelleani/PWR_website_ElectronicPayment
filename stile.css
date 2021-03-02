@@ -1,0 +1,119 @@
+/* esempio di CSS lab5 esercizio 5.2 - grid layout */
+body {opacity: 0.95; background-color: white; font-family: Helvetica, Arial, Sans-Serif; font-size: 100%; color: black}
+
+
+caption { text-align: left }
+th { font-size: 90% }
+
+
+a:link { color: blue; text-decoration: none}
+a:visited { color: purple; text-decoration: none}
+a:hover { color: purple; background: none; text-decoration: none}
+a:active { color: red; background: none; text-decoration: none }
+#login{
+	color: green;
+	text-decoration: none;
+}
+
+
+#logo{
+width: 5%;
+float:right;
+}
+
+.theheader{ grid-area: header; border: 0.1em solid red;	padding: 0.1em; text-align:center;     min-width: 25em;}
+
+.thenavigation{
+    grid-area: menu;
+  	/*padding: 3%;*/
+	border-right-style: ridge;
+}
+
+.thecontent{
+    grid-area: main;
+  	/*padding:3%;*/
+    min-width: 25em;
+   /* padding-bottom:8em;*/
+}
+.riassunto{
+	grid-area: breve;
+	color: blue;
+	text-align:right;
+	font-size:80%;
+	padding-right: 0.5em;
+}
+
+.thefooter { font-family: "Times New Roman", Georgia, Serif; font-style: italic; font-size: 0.8em; 
+    grid-area: footer;
+    height:8em;
+    border-top: 0.3em solid black;
+    padding-top: 0.3em;   /*per evitare bordo e contenuto del footer si sovrappongano*/
+    margin-bottom:1em;     /* per lasciare un po' di spazio dal bordo della finestra */
+    min-width: 25em;
+    float:none;
+    clear:both;
+}
+/* re-define grid for larger screen (with menu aside the main content) */
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+     "header header header header header"
+     "menu main main main breve"
+     "footer footer footer footer footer";
+    /*grid-gap: 10px;*/
+    /*padding: 10px;*/
+  }
+  
+  /* for small screen */
+@media only screen and (max-width: 802px) {
+	
+	.grid-container {
+  display: grid;
+  
+  grid-template-areas:
+   'header header'
+   'menu menu'
+   'main breve'
+   'footer footer';
+  }
+  
+}
+
+@media print{
+	body{
+		font-family: Times, serif;
+		font-size: 10pt;
+		color: black;
+		background-color: white;
+	}
+
+	a{
+		color: blue;
+		
+		
+	}
+
+	.grid-container {
+		display: grid;
+		grid-template-areas:
+		'header'
+		'main'
+		'footer';
+		}
+		
+	.theHeader { grid-area: header; text-align: center; 
+				border: none ;
+				}
+	.theFooter{border: none ;}
+
+	.theLeft{
+		visibility: hidden;
+	}
+	img{
+		visibility: hidden;
+	}
+	a::after {
+		content: " (" attr(href) ")";
+	  }
+}

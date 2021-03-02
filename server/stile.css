@@ -1,0 +1,157 @@
+/* esempio di CSS lab5 esercizio 5.2 - grid layout */
+body {background-color: white; font-family: Helvetica, Arial, Sans-Serif; font-size: 100%; color: black}
+
+
+caption { text-align: left }
+
+a:link { color: blue; text-decoration: none}
+a:visited { color: blue; text-decoration: none}
+a:hover { color: purple; background: none; text-decoration: none}
+a:active { color: purple; background: none; text-decoration: none }
+
+
+li{
+	color:blue;
+	text-decoration:none;
+}
+li.log{
+	color:blue;
+	text-decoration:none;
+}
+p.n_dati{
+	font-size:90%;
+	margin-bottom:1em;
+}
+
+/*FORMAT TABELLA */
+table { border: 0.1em solid black; margin:auto; margin-top:3%;}
+th,td { border: 0.05em solid black; text-align:center; padding:1em;}
+td.number { text-align:left; }
+td.label { text-align:right; }
+th { font-style: italic; }
+
+.theheader{ grid-area: header; border: 0.1em solid red;	padding: 0.1em; text-align:center;}
+
+.thenavigation{
+    grid-area: menu;
+  	
+	min-width: 10em;
+	 
+	/*massima proporzionale alla dimesnione finestra*/
+	border-right-style: ridge;
+}
+
+.thecontent{
+    grid-area: main;
+  	
+    min-width: 25em;
+    
+}
+.riassunto{
+	grid-area: breve;
+	color: blue;
+	text-align:right;
+	font-size:80%;
+	padding-right: 0.5em;
+}
+
+.thefooter { font-family: "Times New Roman", Georgia, Serif; font-style: italic; font-size: 0.8em; 
+    grid-area: footer;
+    height:8em;
+    border-top: 0.3em solid black;
+    padding-top: 0.3em;   /*per evitare bordo e contenuto del footer si sovrappongano*/
+    margin-bottom:1em;     /* per lasciare un po' di spazio dal bordo della finestra */
+    min-width: 25em;
+    float:none;
+    clear:both;
+}
+/* re-define grid for larger screen (with menu aside the main content) */
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+     "header header header header header"
+     "menu main main main breve"
+     "footer footer footer footer footer";
+    /*grid-gap: 10px;*/
+    /*padding: 10px;*/
+  }
+  
+  /* for small screen */
+@media only screen and (max-width: 762px) {
+	
+	body{
+		
+		color: black;
+	}
+	.grid-container {
+  display: grid;
+  
+  grid-template-areas:
+   'header header'
+   'menu menu'
+   'main breve'
+   'footer footer';
+  }
+  .thenavigation{
+    grid-area: menu;
+  	/*padding: 3%;*/
+	border: none;
+}
+  table { border:0.1em solid black;}
+th,td { border: 0.05em solid black; text-align:center; font-size: 80%;}
+td.number { text-align:left; }
+td.label { text-align:right; }
+th { font-style: italic; }
+  
+}
+
+@media print{
+	body{
+		font-family: "Times New Roman",Times, serif;
+		font-size: 12pt;
+		color: black;
+		background-color: white;
+	}
+
+	a{
+		color: blue;
+		
+		
+	}
+
+	.grid-container {
+		display: grid;
+		grid-template-areas:
+		'header'
+		'main'
+		'footer';
+		}
+		
+	.theheader { grid-area: header; text-align: center; 
+				border: none ;
+				}
+	.thefooter{border: none ;}
+	.thenavigation{
+		visibility: hidden;
+	}
+
+	.riassunto{
+		visibility: hidden;
+	}
+	img{
+		visibility: hidden;
+	}
+	a::after {
+		content: " (" attr(href) ")";
+	  }
+	#css{
+		visibility: hidden;
+		content: none;
+	}
+	table { border: 0.1em solid black; margin:auto;}
+th,td { border: 0.05em solid black; text-align:center;}
+td.number { text-align:left; }
+td.label { text-align:right; }
+th { font-style: italic; }
+}
